@@ -1,7 +1,7 @@
 #!/bin/bash
 
-BASE_URL="https://raw.githubusercontent.com/orangekame3/winget-pkgs/main/manifests/g/orangekame3/gitfetch"
-FILES=("orangekame3.gitfetch.yaml" "orangekame3.gitfetch.installer.yaml" "orangekame3.gitfetch.locale.en-US.yaml")
+BASE_URL="https://raw.githubusercontent.com/orangekame3/winget-pkgs/main/manifests/g/orangekame3/ghfetch"
+FILES=("orangekame3.ghfetch.yaml" "orangekame3.ghfetch.installer.yaml" "orangekame3.ghfetch.locale.en-US.yaml")
 
 mkdir -p ./tmp
 

@@ -1,4 +1,4 @@
-module github.com/orangekame3/gitfetch
+module github.com/orangekame3/ghfetch
 
 go 1.21.0
 
