@@ -44,7 +44,7 @@ Output img/demo.gif
 
 Set FontSize 32
 Set Width 2000
-Set Height 1000
+Set Height 1200
 
 Sleep 500ms
 Type "ghfetch -u orangekame3" Sleep 1000ms Enter

@@ -1,8 +1,8 @@
 <div align="center">
   
-# :octocat: ghfetch
-  
-ghfetch is a clear command with PAC-MAN animation
+# ghfetch
+
+:octocat: ghfetch is a CLI tool to fetch GitHub user information.
   
 <a href="https://opensource.org/licenses/MIT">
 <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License badge">
@@ -34,3 +34,24 @@ go install github.com/orangekame3/ghfetch@latest
 ```shell
 brew install orangekame3/tap/ghfetch
 ```
+
+## Usage
+
+```shell
+❯ ghfetch -h
+Fetch GitHub user's profile
+
+Usage:
+  ghfetch [flags]
+
+Flags:
+  -c, --color string   Highlight color for text (default "blue")
+  -h, --help           help for ghfetch
+  -t, --toggle         Help message for toggle
+  -u, --user string    GitHub username
+  -v, --version        version for ghfetch
+```
+
+## To Do
+
+- [ ] Add GitHub stats
