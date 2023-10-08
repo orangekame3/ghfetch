@@ -34,7 +34,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-type GitHubUser struct {
+type gitHubUser struct {
 	Login     string `json:"login"`
 	Name      string `json:"name"`
 	Repos     int    `json:"public_repos"`
@@ -99,7 +99,7 @@ var rootCmd = &cobra.Command{
 	},
 }
 
-func fetchUser(username string) (*GitHubUser, error) {
+func fetchUser(username string) (*gitHubUser, error) {
 	url := fmt.Sprintf("https://api.github.com/users/%s", username)
 	resp, err := http.Get(url)
 	if err != nil {
@@ -107,7 +107,7 @@ func fetchUser(username string) (*GitHubUser, error) {
 	}
 	defer resp.Body.Close()
 
-	var user GitHubUser
+	var user gitHubUser
 	err = json.NewDecoder(resp.Body).Decode(&user)
 	if err != nil {
 		return nil, err
