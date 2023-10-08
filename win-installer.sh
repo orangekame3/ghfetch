@@ -1,7 +1,7 @@
 #!/bin/bash
 
-BASE_URL="https://raw.githubusercontent.com/orangekame3/winget-pkgs/main/manifests/g/orangekame3/cobra-template"
-FILES=("orangekame3.cobra-template.yaml" "orangekame3.cobra-template.installer.yaml" "orangekame3.cobra-template.locale.en-US.yaml")
+BASE_URL="https://raw.githubusercontent.com/orangekame3/winget-pkgs/main/manifests/g/orangekame3/gitfetch"
+FILES=("orangekame3.gitfetch.yaml" "orangekame3.gitfetch.installer.yaml" "orangekame3.gitfetch.locale.en-US.yaml")
 
 mkdir -p ./tmp
 

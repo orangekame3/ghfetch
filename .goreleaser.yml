@@ -46,12 +46,12 @@ brews:
       token: "{{ .Env.TAP_GITHUB_TOKEN }}"
 
 winget:
-  - name: cobra-template
+  - name: gitfetch
     publisher: orangekame3
     license: "mit"
     copyright: Takafumi Miyanaga
     short_description: A template for creating package using cobra.
-    path: manifests/orangekame3/cobra-template
+    path: manifests/orangekame3/gitfetch
     repository:
       owner: orangekame3
       name: winget-pkgs

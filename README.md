@@ -1,15 +1,15 @@
-# cobra-template
+# gitfetch
 
 ## Install
 
 ### Go
 
 ```shell
-go install github.com/orangekame3/cobra-template@latest
+go install github.com/orangekame3/gitfetch@latest
 ```
 
 ### Homebrew
 
 ```shell
-brew install orangekame3/tap/cobra-template
+brew install orangekame3/tap/gitfetch
 ```
