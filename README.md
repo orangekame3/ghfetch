@@ -2,7 +2,7 @@
   
 # ghfetch
 
-:octocat: ghfetch is a CLI tool to fetch GitHub user information.
+:octocat: ghfetch is a CLI tool to fetch GitHub user information and show like neofetch
   
 <a href="https://opensource.org/licenses/MIT">
 <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License badge">
