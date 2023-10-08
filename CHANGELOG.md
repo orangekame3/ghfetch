@@ -1,5 +1,7 @@
 # Changelog
 
+## [v0.0.12](https://github.com/orangekame3/ghfetch/compare/v0.0.11...v0.0.12) - 2023-10-08
+
 ## [v0.0.11](https://github.com/orangekame3/ghfetch/commits/v0.0.11) - 2023-10-08
 
 ## [v0.0.11](https://github.com/orangekame3/ghfetch/compare/v0.0.10...v0.0.11) - 2023-10-07
