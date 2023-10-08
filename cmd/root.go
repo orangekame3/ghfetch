@@ -23,31 +23,99 @@ THE SOFTWARE.
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
+	"net/http"
 	"os"
+	"strings"
 
+	"github.com/TheZoraiz/ascii-image-converter/aic_package"
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
+
+type GitHubUser struct {
+	Login     string `json:"login"`
+	Name      string `json:"name"`
+	Repos     int    `json:"public_repos"`
+	Followers int    `json:"followers"`
+	Following int    `json:"following"`
+}
+
+var username string
+var highlightColor string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "ghfetch",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
+	Short: "Fetch GitHub user's profile",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("rootCmd called")
+		if username == "" {
+			fmt.Println("Please provide a GitHub username using the --user flag.")
+			return
+		}
+
+		flags := aic_package.DefaultFlags()
+		flags.Dimensions = []int{50, 25}
+		flags.Colored = true
+		flags.CustomMap = " .-=+#@"
+		asciiArt, err := aic_package.Convert(fmt.Sprintf("https://github.com/%s.png", username), flags)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		asciiLines := strings.Split(asciiArt, "\n")
+
+		user, err := fetchUser(username)
+		if err != nil {
+			fmt.Println("Error fetching user information:", err)
+			return
+		}
+		titleColor := colorMap[highlightColor].SprintFunc()
+		infoColor := color.New(color.FgWhite).SprintFunc()
+
+		// Displaying username at the top
+		fmt.Printf("%s    %s: %s\n", asciiLines[0], titleColor("GitHub User"), titleColor(user.Login))
+
+		userInfo := []string{
+			fmt.Sprintf("Name: %s", user.Name),
+			fmt.Sprintf("Repos: %d", user.Repos),
+			fmt.Sprintf("Followers: %d", user.Followers),
+			fmt.Sprintf("Following: %d", user.Following),
+		}
+
+		for i := 1; i < len(asciiLines) || i-1 < len(userInfo); i++ {
+			left := ""
+			if i < len(asciiLines) {
+				left = asciiLines[i]
+			}
+			right := ""
+			if i-1 < len(userInfo) {
+				splitted := strings.Split(userInfo[i-1], ": ")
+				right = titleColor(splitted[0]) + ": " + infoColor(splitted[1])
+			}
+			fmt.Printf("%-60s    %s\n", left, right)
+		}
 	},
 }
 
+func fetchUser(username string) (*GitHubUser, error) {
+	url := fmt.Sprintf("https://api.github.com/users/%s", username)
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	var user GitHubUser
+	err = json.NewDecoder(resp.Body).Decode(&user)
+	if err != nil {
+		return nil, err
+	}
+	return &user, nil
+}
+
 // Execute adds all child commands to the root command and sets flags appropriately.
-// This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
@@ -56,13 +124,17 @@ func Execute() {
 }
 
 func init() {
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.
-
-	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.ghfetch.yaml)")
-
-	// Cobra also supports local flags, which will only run
-	// when this action is called directly.
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	rootCmd.Flags().StringVarP(&username, "user", "u", "", "GitHub username")
+	rootCmd.Flags().StringVarP(&highlightColor, "color", "c", "blue", "Highlight color for text")
+}
+
+// Color map for user-specified colors
+var colorMap = map[string]*color.Color{
+	"red":     color.New(color.FgRed),
+	"green":   color.New(color.FgGreen),
+	"yellow":  color.New(color.FgYellow),
+	"blue":    color.New(color.FgBlue),
+	"magenta": color.New(color.FgMagenta),
+	"cyan":    color.New(color.FgCyan),
 }
