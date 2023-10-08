@@ -41,6 +41,9 @@
 #   Show                            Show the subsequent commands in the output
 
 Output img/demo.gif
+Set Margin 20
+Set MarginFill "#674EFF"
+Set BorderRadius 10
 
 Set FontSize 32
 Set Width 2000
@@ -48,4 +51,4 @@ Set Height 1200
 
 Sleep 500ms
 Type "ghfetch -u orangekame3" Sleep 1000ms Enter
-Sleep 5s
+Sleep 10s
