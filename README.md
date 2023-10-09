@@ -41,7 +41,7 @@ Download the latest compiled binaries and put it anywhere in your executable pat
 
 [Download here](https://github.com/orangekame3/ghfetch/releases)
 
-### Quick Start
+## Quick Start
 
 ```shell
 ghfetch -u <your_github_account_name> --access-token=<YOUR_GITHUB_PERSONAL_ACCESS_TOKEN>
