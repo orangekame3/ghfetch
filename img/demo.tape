@@ -49,5 +49,5 @@ Set FontSize 32
 Set Width 1600
 Set Height 1000
 Sleep 500ms
-Type "ghfetch -u orangekame3 --access-token=$GITHUB_TOKEN -m "Wellcome to my account page!!!"" Sleep 1000ms Enter
+Type "ghfetch -u orangekame3 --access-token=$GITHUB_TOKEN -m "Wellcome to my account page"" Sleep 1000ms Enter
 Sleep 10s
