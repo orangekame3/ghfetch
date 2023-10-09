@@ -48,7 +48,6 @@ Set BorderRadius 20
 Set FontSize 32
 Set Width 1600
 Set Height 1000
-
 Sleep 500ms
-Type "ghfetch -u orangekame3 --access-token=$GITHUB_TOKEN -p '{"Occupation":"SWE","Language":"Go Python"}'" Sleep 1000ms Enter
+Type "ghfetch -u orangekame3 --access-token=$GITHUB_TOKEN -m "Hello"" Sleep 1000ms Enter
 Sleep 10s
