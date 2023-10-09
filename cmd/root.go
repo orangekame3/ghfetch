@@ -31,8 +31,10 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/TheZoraiz/ascii-image-converter/aic_package"
+	"github.com/briandowns/spinner"
 	"github.com/charmbracelet/lipgloss"
 	"github.com/fatih/color"
 	"github.com/nsf/termbox-go"
@@ -67,6 +69,12 @@ var rootCmd = &cobra.Command{
 		if accessToken == "" {
 			return errors.New("ACCESS_TOKEN environment variable is not set!")
 		}
+		s := spinner.New(spinner.CharSets[2], 50*time.Millisecond)
+		_ = s.Color("blue")
+		if highlightColor != "" {
+			_ = s.Color(highlightColor)
+		}
+		s.Start()
 		paneWidth := getTermWidth() / 2
 		defaultWidth := 50
 		defaultHeight := 25
@@ -90,7 +98,7 @@ var rootCmd = &cobra.Command{
 		leftPane := lipgloss.NewStyle().Width(newWidth).Render(asciiArt)
 
 		user, err := fetchUserWithGraphQL(username, accessToken)
-
+		s.Stop()
 		if err != nil {
 			return errors.New("Error fetching user information")
 		}
@@ -153,7 +161,7 @@ func Execute() {
 func init() {
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 	rootCmd.Flags().StringVarP(&username, "user", "u", "", "GitHub username")
-	rootCmd.Flags().StringVarP(&highlightColor, "color", "c", "blue", "Highlight color for text")
+	rootCmd.Flags().StringVarP(&highlightColor, "color", "c", "blue", "Highlight color red, green, yellow, blue, magenta, cyan")
 	rootCmd.Flags().StringVarP(&profileString, "profile", "p", "", "Additional user profile in JSON format")
 	rootCmd.PersistentFlags().StringVar(&accessToken, "access-token", "", "Your GitHub access token")
 }

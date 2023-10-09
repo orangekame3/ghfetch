@@ -4,6 +4,7 @@ go 1.21.0
 
 require (
 	github.com/TheZoraiz/ascii-image-converter v1.13.1
+	github.com/briandowns/spinner v1.23.0
 	github.com/charmbracelet/lipgloss v0.8.0
 	github.com/fatih/color v1.15.0
 	github.com/nsf/termbox-go v1.1.1
@@ -30,4 +31,5 @@ require (
 	github.com/xo/terminfo v0.0.0-20210125001918-ca9a967f8778 // indirect
 	golang.org/x/image v0.0.0-20210628002857-a66eb6448b8d // indirect
 	golang.org/x/sys v0.7.0 // indirect
+	golang.org/x/term v0.1.0 // indirect
 )

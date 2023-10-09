@@ -1,0 +1,50 @@
+name: Update ghfetch gif with vhs
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: '1.21'
+        
+    - name: Install latest ttyd
+      run: |
+        wget https://github.com/tsl0922/ttyd/releases/download/1.7.4/ttyd.x86_64
+        chmod +x ttyd.x86_64
+        sudo mv ttyd.x86_64 /usr/local/bin/ttyd
+        ttyd --version
+        
+    - name: Install ffmpeg
+      run: |
+        sudo apt update
+        sudo apt install -y ffmpeg
+        
+    - name: Install vhs and ghfetch
+      run: |
+        go install github.com/orangekame3/ghfetch@latest
+        go install github.com/charmbracelet/vhs@latest
+
+    - name: Generate ghfetch gif with vhs
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+      run: |
+        vhs < img/demo.tape
+
+    - name: Commit and push if there are changes
+      run: |
+        git add img/demo.gif
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "Update ghfetch gif with vhs" -a || echo "No changes to commit"
+        git push
