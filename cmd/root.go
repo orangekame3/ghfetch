@@ -112,7 +112,6 @@ var rootCmd = &cobra.Command{
 		TotalCommitsThisYear := titleColor("Total Commit This Year")
 		TotalPRs := titleColor("Total PRs")
 		TotalIssues := titleColor("Total Issues")
-		Message := titleColor("Message")
 
 		userInfoPane := []string{
 			fmt.Sprintf("  %s: %s", User, username),
@@ -129,9 +128,6 @@ var rootCmd = &cobra.Command{
 
 		userInfoPane = append(userInfoPane, separator(username))
 		userInfoPane = append(userInfoPane, getPalette())
-		if message != "" {
-			userInfoPane = append(userInfoPane, fmt.Sprintf("  %s: %s", Message, message))
-		}
 		rightPaneContent := strings.Join(userInfoPane, "\n")
 		rightPane := lipgloss.NewStyle().Width(paneWidth).Render(rightPaneContent)
 
@@ -152,7 +148,6 @@ func Execute() {
 func init() {
 	rootCmd.Flags().StringVarP(&username, "user", "u", "", "GitHub username")
 	rootCmd.Flags().StringVarP(&highlightColor, "color", "c", "blue", "Highlight color red, green, yellow, blue, magenta, cyan")
-	rootCmd.Flags().StringVarP(&message, "message", "m", "", "message to display in the profile")
 	rootCmd.Flags().StringVar(&accessToken, "access-token", "", "Your GitHub access token")
 	_ = rootCmd.MarkPersistentFlagRequired("user")
 	_ = rootCmd.MarkPersistentFlagRequired("access-token")
