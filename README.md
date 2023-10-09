@@ -131,7 +131,7 @@ To make this work, create a secret named `GH_PAT` in your repository settings wi
 
 Next, add a file named img/demo.tape to your repository.
 
-```tape
+```txt
 # img/demo.tape
 # VHS documentation
 Output img/demo.gif
