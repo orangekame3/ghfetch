@@ -60,7 +60,7 @@ Flags:
 
 ## Obtaining a GitHub Personal Access Token
 
-For guidance, refer to the following GitHub documentation:
+ghfetch requires a GitHub personal access token to fetch user information. You can create a personal access token by following the instructions on the GitHub documentation:
 
 [Managing your personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
 
@@ -121,9 +121,9 @@ jobs:
         git push
 ```
 
-Then, create a secret named `GH_PAT` in your repository settings with your GitHub personal access token.
+To make this work, create a secret named `GH_PAT` in your repository settings with your GitHub personal access token.
 
-and create a file named `img/demo.tape` in your repository.
+Next, add a file named img/demo.tape to your repository.
 
 ```tape
 # img/demo.tape
@@ -142,18 +142,19 @@ Type "ghfetch -u orangekame3 --access-token=$GITHUB_TOKEN" Sleep 1000ms Enter
 Sleep 10s
 ```
 
-Almost done!
-You can see the gif image in your img/demo.gif when you trigger the workflows.
+Once set up, triggering the workflow will generate and display the gif image at img/demo.gif in your profile README repository.
 
-## How to create your profile README
+## Creating a Profile README
 
-See following GitHub document.
+For creating and managing a profile README, refer to this GitHub documentation:
 
 [Managing your profile README](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme)
 
-Just add following markdown to your profile README.
+To showcase the gif in your profile README, simply reference the gif from your profile README managing repository:
 
 ![Alt text](img/image.png)
+
+See more examples in [my profile README](https://github.com/orangekame3/orangekame3)
 
 ## License
 
