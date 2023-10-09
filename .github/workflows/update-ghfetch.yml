@@ -17,7 +17,7 @@ jobs:
       uses: actions/setup-go@v3
       with:
         go-version: '1.21'
-        
+
     - name: Install latest ttyd
       run: |
         wget https://github.com/tsl0922/ttyd/releases/download/1.7.4/ttyd.x86_64
@@ -32,23 +32,18 @@ jobs:
         
     - name: Install vhs and ghfetch
       run: |
-        go install github.com/orangekame3/ghfetch@v0.0.13
-    - name: Run ghfetch
-      uses: charmbracelet/vhs-action@v1
-      with:
-        path: 'img/demo.tape'
-    - name: export GITHUB_TOKEN
-      run: |
-        export GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
-    - name: Convert to gif
-        go install github.com/orangekame3/ghfetch@v0.0.13
-      uses: stefanzweifel/git-auto-commit-action@v4
+        go install github.com/orangekame3/ghfetch@latest
+        go install github.com/charmbracelet/vhs@latest
+    - name: Generate ghfetch gif with vhs
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        commit_message: Update generated VHS GIF
-        branch: main
-        commit_user_name: vhs-action 📼
-        commit_user_email: actions@github.com
-        commit_author: vhs-action 📼 <actions@github.com>
-        file_pattern: 'img/*.gif'
+        GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+      run: |
+        export GITHUB_TOKEN=${{ secrets.GH_PAT }}
+        vhs < img/demo.tape
+    - name: Commit and push if there are changes
+      run: |
+        git add img/demo.gif
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "Update ghfetch gif with vhs" -a || echo "No changes to commit"
+        git push
