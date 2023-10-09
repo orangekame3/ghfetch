@@ -32,7 +32,7 @@ jobs:
         
     - name: Install vhs and ghfetch
       run: |
-        go install github.com/orangekame3/ghfetch@latest
+        go install github.com/orangekame3/ghfetch@v0.0.13
         go install github.com/charmbracelet/vhs@latest
 
     - name: Generate ghfetch gif with vhs
