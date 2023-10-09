@@ -35,23 +35,34 @@ go install github.com/orangekame3/ghfetch@latest
 brew install orangekame3/tap/ghfetch
 ```
 
+### Download
+
+Download the latest compiled binaries and put it anywhere in your executable path.
+
+[Download here](https://github.com/orangekame3/ghfetch/releases)
+
 ## Usage
 
 ```shell
 ❯ ghfetch -h
-Fetch GitHub user's profile
+Fetch GitHub user's profile, just like neofetch
 
 Usage:
   ghfetch [flags]
 
 Flags:
-  -c, --color string   Highlight color for text (default "blue")
-  -h, --help           help for ghfetch
-  -t, --toggle         Help message for toggle
-  -u, --user string    GitHub username
-  -v, --version        version for ghfetch
+      --access-token string   Your GitHub access token
+  -c, --color string          Highlight color red, green, yellow, blue, magenta, cyan (default "blue")
+  -h, --help                  help for ghfetch
+  -u, --user string           GitHub username
+  -v, --version               version for ghfetch
 ```
 
-## To Do
+## License
 
-- [ ] Add GitHub stats
+`ghfetch` is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+
+
+## Author
+ 
+👤 [**orangekame3**](@orangekame3)
