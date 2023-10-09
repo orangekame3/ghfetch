@@ -64,10 +64,10 @@ var (
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "ghfetch",
-	Short: "Fetch GitHub user's profile",
+	Short: "Fetch GitHub user's profile, just like neofetch",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if accessToken == "" {
-			return errors.New("ACCESS_TOKEN environment variable is not set!")
+			return errors.New("access token environment variable is not set")
 		}
 		s := spinner.New(spinner.CharSets[2], 50*time.Millisecond)
 		_ = s.Color("blue")
@@ -85,7 +85,7 @@ var rootCmd = &cobra.Command{
 		newWidth := int(float64(defaultWidth) * scaleFactor)
 
 		if username == "" {
-			return errors.New("Please provide a GitHub username using the --user flag.")
+			return errors.New("please provide a github username using the --user flag")
 		}
 		flags := aic_package.DefaultFlags()
 		flags.Dimensions = []int{newWidth, int(float64(defaultHeight) * scaleFactor)}
@@ -100,10 +100,9 @@ var rootCmd = &cobra.Command{
 		user, err := fetchUserWithGraphQL(username, accessToken)
 		s.Stop()
 		if err != nil {
-			return errors.New("Error fetching user information")
+			return errors.New("error fetching user information")
 		}
 
-		// Create user info pane
 		titleColor := colorMap[highlightColor].SprintFunc()
 		User := titleColor("User")
 		Name := titleColor("Name")
@@ -116,7 +115,6 @@ var rootCmd = &cobra.Command{
 		TotalIssues := titleColor("Total Issues")
 
 		userInfoPane := []string{
-
 			fmt.Sprintf("  %s: %s", User, username),
 			separator(username),
 			fmt.Sprintf("  %s: %s", Name, user.Name),
@@ -129,22 +127,24 @@ var rootCmd = &cobra.Command{
 			fmt.Sprintf("  %s: %d", TotalIssues, user.TotalIssues),
 		}
 		if profileString != "" {
+			userInfoPane = append(userInfoPane, separator(username))
 			err := json.Unmarshal([]byte(profileString), &profileData)
 			if err != nil {
 				fmt.Println("error parsing profile json:", err)
 				return err
 			}
 
-			// Append custom profile data to the userInfoPane
 			for key, value := range profileData {
 				key := titleColor(key)
 				userInfoPane = append(userInfoPane, fmt.Sprintf("  %s: %v", key, value))
 			}
 		}
+		userInfoPane = append(userInfoPane, separator(username))
+		userInfoPane = append(userInfoPane, getPalette())
 		rightPaneContent := strings.Join(userInfoPane, "\n")
 		rightPane := lipgloss.NewStyle().Width(paneWidth).Render(rightPaneContent)
 
-		fmt.Print(lipgloss.JoinHorizontal(lipgloss.Center, leftPane, rightPane))
+		fmt.Println(lipgloss.JoinHorizontal(lipgloss.Center, leftPane, rightPane))
 		return nil
 	},
 }
@@ -159,11 +159,12 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 	rootCmd.Flags().StringVarP(&username, "user", "u", "", "GitHub username")
 	rootCmd.Flags().StringVarP(&highlightColor, "color", "c", "blue", "Highlight color red, green, yellow, blue, magenta, cyan")
 	rootCmd.Flags().StringVarP(&profileString, "profile", "p", "", "Additional user profile in JSON format")
-	rootCmd.PersistentFlags().StringVar(&accessToken, "access-token", "", "Your GitHub access token")
+	rootCmd.Flags().StringVar(&accessToken, "access-token", "", "Your GitHub access token")
+	_ = rootCmd.MarkPersistentFlagRequired("user")
+	_ = rootCmd.MarkPersistentFlagRequired("access-token")
 }
 
 var colorMap = map[string]*color.Color{
@@ -194,9 +195,9 @@ func separator(value string) string {
 
 func fetchUserWithGraphQL(username, accessToken string) (*gitHubUser, error) {
 	url := "https://api.github.com/graphql"
-	token := accessToken // 実際には環境変数などから取得する
+	token := accessToken
 	var endCursor string
-	var hasNextPage bool = true
+	hasNextPage := true
 	var totalStars int
 	var totalRepos int
 	var query string
@@ -351,4 +352,17 @@ var result struct {
 			}
 		} `json:"user"`
 	} `json:"data"`
+}
+
+func getPalette() string {
+	color1 := "\x1b[0;29m███\x1b[0m"
+	color2 := "\x1b[0;31m███\x1b[0m"
+	color3 := "\x1b[0;32m███\x1b[0m"
+	color4 := "\x1b[0;33m███\x1b[0m"
+	color5 := "\x1b[0;34m███\x1b[0m"
+	color6 := "\x1b[0;35m███\x1b[0m"
+	color7 := "\x1b[0;36m███\x1b[0m"
+	color8 := "\x1b[0;37m███\x1b[0m"
+
+	return color1 + color2 + color3 + color4 + color5 + color6 + color7 + color8
 }
