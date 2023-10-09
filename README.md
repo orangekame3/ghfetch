@@ -35,7 +35,7 @@ go install github.com/orangekame3/ghfetch@latest
 brew install orangekame3/tap/ghfetch
 ```
 
-### Download
+### Manual Download
 
 Download the latest compiled binaries and put it anywhere in your executable path.
 
@@ -58,17 +58,15 @@ Flags:
   -v, --version               version for ghfetch
 ```
 
-## How to get GitHub personal access token
+## Obtaining a GitHub Personal Access Token
 
-See following GitHub document.
+For guidance, refer to the following GitHub documentation:
 
 [Managing your personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
 
-## How to gerarate gif image with GitHub Actions and ghfetch
+## Generating a gif Image Using GitHub Actions and ghfetch
 
-See following GitHub Actions workflow.
-
-To generate gif image, I use [vhs](https://github.com/charmbracelet/vhs)
+Here's a GitHub Actions workflow for generating a gif image. The gif creation uses [vhs](https://github.com/charmbracelet/vhs)
 
 ```yaml
 #.github/workflows/ghfetch.yml
