@@ -164,7 +164,6 @@ See more examples in [my profile README](https://github.com/orangekame3/orangeka
 
 `ghfetch` is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
 
-
 ## Author
- 
+
 👤 [**orangekame3**](https://github.com/orangekame3)
