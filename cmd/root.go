@@ -56,7 +56,6 @@ type gitHubUser struct {
 var (
 	username       string
 	highlightColor string
-	message        string
 	accessToken    string
 )
 
