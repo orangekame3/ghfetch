@@ -1,12 +1,11 @@
 module github.com/orangekame3/ghfetch
 
-go 1.21.0
+go 1.20
 
 require (
 	github.com/TheZoraiz/ascii-image-converter v1.13.1
 	github.com/briandowns/spinner v1.23.0
 	github.com/charmbracelet/lipgloss v0.8.0
-	github.com/common-nighthawk/go-figure v0.0.0-20210622060536-734e95fb86be
 	github.com/fatih/color v1.15.0
 	github.com/nsf/termbox-go v1.1.1
 	github.com/spf13/cobra v1.7.0
