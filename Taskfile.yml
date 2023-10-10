@@ -13,3 +13,9 @@ tasks:
     desc: Run VHS
     cmds:
       - vhs < img/demo.tape
+
+  credits:
+    desc: update credits
+    cmds:
+      - gocredits . > CREDITS
+      
