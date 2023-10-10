@@ -81,7 +81,7 @@ name: Update ghfetch gif with vhs
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: '0 */6 * * *' # every 6 hours
 
 jobs:
   build:
@@ -113,8 +113,6 @@ jobs:
         go install github.com/orangekame3/ghfetch@latest
         go install github.com/charmbracelet/vhs@latest
     - name: Generate ghfetch gif with vhs
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_PAT }}
       run: |
         export GITHUB_TOKEN=${{ secrets.GH_PAT }}
         vhs < img/demo.tape
